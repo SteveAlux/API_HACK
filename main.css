@@ -8,10 +8,22 @@ html{
   height: 100%;
 }
 body{
-  height:100%;
+  
   display: flex;
   flex-direction: column;
-
+  
+}
+#arrowback{
+  position: absolute;
+  padding:7px;
+  left:0;
+  top:5px;
+  
+}
+#arrowback:hover{
+  background-color: black;
+  color:white;
+  cursor: pointer;
 }
 header{
   height: 42px;
@@ -30,7 +42,7 @@ header h2{
   height: 80%;
 }
 #shopping_cart_image{
-  background-image:url('GroceryCart.jpg');
+  background-image:url('http://www.todayifoundout.com/wp-content/uploads/2015/12/shopping-cart.png');
   background-position: center;
   background-size: cover;
 
@@ -43,27 +55,32 @@ header h2{
 #shopping_cart_image button{
   width: 127px;
   height: 35px;
-  background-color:#D3D3C3;
+  background-color:rgba(211, 211, 211, 0.89);
   color:rgb(34, 34, 34);
   border-radius: 10px;
   font-size: 16px;
   font-weight: normal;
+  transition: .5s;
+}
+#shopping_cart_image button:hover{
+  cursor: pointer;
+  background-color: rgb(38, 230, 38);
+  color :rgba(235, 235, 235, 0.993);
 }
 main{
   color:#8F8F8F;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 200px;
   flex-grow: 1;
 }
 main p{
   width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  align-self: center;
   text-align: center;
-  padding:10px;
-  margin-top: 45%;
-  flex-shrink: 1;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 main i{
   color: #1FA517;
@@ -90,11 +107,180 @@ main i{
   border-radius: 50%;
 }
 footer{
- 
+  position: fixed;
+  margin-top: 40px;
   bottom:0;
-  display: block;
+  
+  
   height:42px;
   width: 100%;
   background-color: #CBCBCB;
 
+}
+#grocery_list{
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  transition: .5s;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  border:1px solid black;
+  margin-top: 10px;
+  max-width: 350px;
+}
+#grocery_list ul{
+  padding-left: 20px;
+  margin-top: 3px;
+
+}
+#grocery_list li{
+  font-size: 13px;
+  margin:20px;
+
+  
+}
+#grocery_list h5{
+  padding:5px;
+}
+
+#bottom_box{
+  margin-bottom:40px;
+}
+
+h5{
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#pics{
+  font-size: 50px;
+  margin-top:auto;
+  margin-bottom: auto;
+}
+#circle{
+  
+  font-size: auto;
+}
+.results_box{
+  height:200px;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 300px;
+  background-color:gray;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.results_box:hover{
+  background-color: lightgray;
+  cursor: pointer;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+transition: .5s;
+}
+
+fieldset{
+  display: flex;
+  flex-direction: column;
+}
+#cat_button{
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom:20px;
+  width: 150px;
+  height: 50px;;
+}
+
+.hidden{
+  display: none;
+  opacity: .2;
+}
+section{
+  
+}
+#js-form{
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+#top_category_title{
+  margin-top:0px;
+}
+
+h4{
+  font-weight: normal;
+  background-color: rgb(245, 245, 245);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
