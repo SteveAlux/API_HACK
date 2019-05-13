@@ -1,0 +1,13 @@
+Views:
+ 1. Start Screen(sign up, login)
+ 2. Loading Screen
+ 3. Dashboard/Results Screen
+ 3.a Individual Results Scree
+ 4. Recipe Screen
+ 5. Nutrition Screen
+ 
+
+Flows:
+
+ Start Screen
+--------------

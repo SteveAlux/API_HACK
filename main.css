@@ -1,0 +1,100 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+html{
+  height: 100%;
+}
+body{
+  height:100%;
+  display: flex;
+  flex-direction: column;
+
+}
+header{
+  height: 42px;
+  text-align: center;
+  color:rgba(235, 235, 235, 0.993);
+  background-color: #1FA517;
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+header h2{
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 80%;
+}
+#shopping_cart_image{
+  background-image:url('GroceryCart.jpg');
+  background-position: center;
+  background-size: cover;
+
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#shopping_cart_image button{
+  width: 127px;
+  height: 35px;
+  background-color:#D3D3C3;
+  color:rgb(34, 34, 34);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: normal;
+}
+main{
+  color:#8F8F8F;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  flex-grow: 1;
+}
+main p{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding:10px;
+  margin-top: 45%;
+  flex-shrink: 1;
+}
+main i{
+  color: #1FA517;
+
+}
+#selector_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding:5px;
+  margin-top:4%;
+  width: 100%;
+  
+}
+#selector_buttons *{
+  margin-left:9px;
+  margin-right:9px;
+}
+.unchecked{
+  color:rgba(255, 255, 255, 0.295);
+  border:solid 1px #B9B9B9;
+  border-radius: 50%;
+}
+footer{
+ 
+  bottom:0;
+  display: block;
+  height:42px;
+  width: 100%;
+  background-color: #CBCBCB;
+
+}
