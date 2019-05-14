@@ -35,12 +35,62 @@ function boxClick(){
     $('html').on('click','#top_box', function(event){
         $('#title_text').text('Grocery List');
         let results = renderGroceryList();
-       $('footer').css({'position':'relative'});
+        $('footer').detach();
+
+       
        $('body').css({'height':'auto'});
         $('main').empty();
         $('main').html(results);
+        $('body').append('<footer></footer>');
+        $('footer').css({'position':'relative'});
+
         navarrow=3;
     });
+      $('html').on('click','#bottom_box',function(event){
+        $('#title_text').text('Recipes To Try');
+        let results2 = renderRecipeList();
+        $('footer').detach();
+        $('body').css({'height':'auto'});
+        $('main').empty();
+        $('main').html(results2);
+        $('body').append('<footer></footer>');
+        $('footer').css({'position': 'absolute','bottom':'0'});
+       
+        navarrow=3;
+    });
+    //MODAL OPENING CODE--------------------------------------------
+    $('html').on('click','#recipe_list #myBtn',function(event){
+      $('html').find('#myModal').css({'display':'block'});
+      let modal_content = getModalContent();
+      $('html').find('.modal-content').html(modal_content);
+    });
+}
+
+
+function getModalContent(){
+  return `
+  <span class="close">&times;</span>
+  <h2>Name of Recipe</h6>
+  <img src='' alt='photo of recipe'>
+  <p>Directions on how you will be preparing this food lorem psum dolor sit amet consectetur adipisicing elit. Eligendi enim voluptate, distinctio quo voluptatibus </p>
+  <h3>Ingridients</h6>
+  <ul>
+    <li>ingridient</li>
+    <li>ingridient</li>
+    <li>ingridient</li>
+    <li>ingridient</li>
+    <li>ingridient</li>
+  </ul>
+  <p>Cost of Meal: _______</p>
+
+  `
+}
+
+function recipeClick(){
+  $('html').on('click','#recipe_list li',function(event){
+    console.log('recipe works');
+
+  }); 
 }
 
 
@@ -81,10 +131,28 @@ function renderGroceryList(){
       
       </ul>
     </div>
-
     
     
     `;
+}
+function renderRecipeList(){
+  return `<div id='recipe_list'>
+  <h5>Recipes to try with food</h5>
+  <ul>
+  <li id="myBtn">Recipe</li>
+  <li id="myBtn">Recipe</li>
+  <li id="myBtn">Recipe</li>
+  <li id="myBtn">Recipe</li>
+  <li id="myBtn">Recipe</li>
+  
+
+  
+  </ul>
+</div>
+  
+  
+  `
+
 }
 
 
@@ -107,7 +175,6 @@ function foodQuery(){
     
         <h4 id='top_category_title'>Meal Time</h4>
         <div class= 'form-row'>
-
         <label for= 'Breakfast' class='container'>Breakfast
         <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast">
         <span class="checkmark"></span>
@@ -305,6 +372,7 @@ function navarrowClick(){
         'bottom':'0',
     });
         $('main').css({ 'display':'flex','flex-direction':'column','height':'100%','justify-content': 'space-evenly'});
+        navarrow=2;
         }
         else {
 
@@ -313,12 +381,44 @@ function navarrowClick(){
 }
 
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+$('html').on('click','.close', function(event) {
+  $('html').find('.modal').css({'display':'none'});
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+
+
+
 
 function loadScript(){
     initGame();
     submitClick();
     boxClick();
     navarrowClick();
+    recipeClick();
 }
 
 $(loadScript);
