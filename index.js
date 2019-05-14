@@ -47,7 +47,7 @@ function boxClick(){
         navarrow=3;
     });
       $('html').on('click','#bottom_box',function(event){
-        $('#title_text').text('Recipes To Try');
+        $('#title_text').text('Recipe Ideas');
         let results2 = renderRecipeList();
         $('footer').detach();
         $('body').css({'height':'auto'});
@@ -64,8 +64,32 @@ function boxClick(){
       let modal_content = getModalContent();
       $('html').find('.modal-content').html(modal_content);
     });
+
+    $('html').on('click','#nutrition_link', function(event){
+        $('html').find('#myModal2').css({'display':'block'});
+        $('html').find('.modal').css({'display':'none'});
+      let modal_content2 = getModalContent2();
+      $('html').find('.modal-content2').html(modal_content2);
+    });
+    $('html').on('click','#recipe_info', function(event){
+        $('html').find('#myModal').css({'display':'block'});
+        $('html').find('.modal2').css({'display':'none'});
+        let modal_content = getModalContent();
+      $('html').find('.modal-content').html(modal_content);
+    });
 }
 
+
+function getModalContent2(){
+    return `<span class="close2">&times;</span>
+    <h2>Nutrition Facts</h6>
+    <img src='' alt='graph of nutrients '>
+    <p>Infomation on what nutrients and other health related facts lorem psum dolor sit amet consectetur adipisicing elit. Eligendi enim voluptate, distinctio quo voluptatibus </p>
+    <h3>Nutrients List etc</h6>
+    <p id='recipe_info' class='link'>Back to recipe</p>
+    
+    `;
+}
 
 function getModalContent(){
   return `
@@ -82,7 +106,7 @@ function getModalContent(){
     <li>ingridient</li>
   </ul>
   <p>Cost of Meal: _______</p>
-
+  <p id='nutrition_link' class='link'>Nutrition Facts </p>
   `
 }
 
@@ -137,7 +161,7 @@ function renderGroceryList(){
 }
 function renderRecipeList(){
   return `<div id='recipe_list'>
-  <h5>Recipes to try with food</h5>
+  <h5>Recipes and their directions</h5>
   <ul>
   <li id="myBtn">Recipe</li>
   <li id="myBtn">Recipe</li>
@@ -145,7 +169,6 @@ function renderRecipeList(){
   <li id="myBtn">Recipe</li>
   <li id="myBtn">Recipe</li>
   
-
   
   </ul>
 </div>
@@ -176,7 +199,7 @@ function foodQuery(){
         <h4 id='top_category_title'>Meal Time</h4>
         <div class= 'form-row'>
         <label for= 'Breakfast' class='container'>Breakfast
-        <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast">
+        <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast" >
         <span class="checkmark"></span>
         </label>
   
@@ -383,12 +406,14 @@ function navarrowClick(){
 
 // Get the modal
 var modal = document.getElementById("myModal");
+var modal2= document.getElementById('myModal2');
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName('close2')[0];
 
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
@@ -399,11 +424,17 @@ btn.onclick = function() {
 $('html').on('click','.close', function(event) {
   $('html').find('.modal').css({'display':'none'});
 });
+$('html').on('click','.close2', function(event) {
+    $('html').find('.modal2').css({'display':'none'});
+  });
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+  }
+  else if (event.target == modal2){
+      modal2.style.display= 'none';
   }
 }
 
