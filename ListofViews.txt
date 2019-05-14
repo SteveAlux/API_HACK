@@ -9,5 +9,16 @@ Views:
 
 Flows:
 
- Start Screen
---------------
+    Get Random Recipe
+        recipe
+            [0]
+                extendedIngredients(id,preparationMinutes,cookingMinutes)
+                [0-last Ingredient]
+                (id, name,)
+
+
+    Get Recipe Nutrition by id 
+        (calories,carbs,fat,protien)
+    Get Recipe Price Breakdown by id
+        (totalCost, totalCostPerServing)
+    
