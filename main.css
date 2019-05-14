@@ -42,7 +42,7 @@ header h2{
   height: 80%;
 }
 #shopping_cart_image{
-  background-image:url('GroceryCart.jpg');
+  background-image:url('https://previews.123rf.com/images/creativenature/creativenature1511/creativenature151100052/48926764-grocery-cart-at-a-supermarket-aisle-filled-up-with-food-products-seen-from-the-customers-point-of-vi.jpg');
   background-position: center;
   background-size: cover;
 
@@ -64,7 +64,7 @@ header h2{
 }
 #shopping_cart_image button:hover{
   cursor: pointer;
-  background-color: rgb(38, 230, 38);
+  background-color: rgb(21, 175, 21);
   color :rgba(235, 235, 235, 0.993);
 }
 main{
@@ -116,6 +116,14 @@ footer{
   width: 100%;
   background-color: #CBCBCB;
 
+}
+.link{
+  color:blue;
+}
+.link:hover{
+  text-decoration: underline;
+  color:blue;
+  cursor: pointer;
 }
 #grocery_list{
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -176,8 +184,11 @@ footer{
 #bottom_box{
   margin-bottom:40px;
 }
-
+.results_box h5{
+  padding-top: 5px;
+}
 h5{
+
   font-size: 18px;
   font-weight: normal;
 }
@@ -197,15 +208,16 @@ h5{
   margin-right: auto;
   margin-left: auto;
   max-width: 300px;
-  background-color:gray;
+  background-color:rgb(214, 214, 214);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .results_box:hover{
-  background-color: lightgray;
+  background-color: rgb(182, 182, 182);
   cursor: pointer;
+  color: rgb(221, 221, 221);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -315,7 +327,18 @@ h4{
 }
 
 
-
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
 .modal {
   display: none; /* Hidden by default */
@@ -338,6 +361,14 @@ h4{
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+.modal-content2 {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
 
 /* The Close Button */
 .close {
@@ -353,5 +384,16 @@ h4{
   text-decoration: none;
   cursor: pointer;
 }
+.close2 {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
-
+.close2:hover,
+.close2:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
