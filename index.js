@@ -3,7 +3,7 @@ let navarrow = 0;
 
 
 
-function initGame(){
+function initGroceryBuddy(){
     $('html').on('click','#startGame', function(event){
         console.log('woah');
         let foodform = foodQuery();
@@ -19,7 +19,13 @@ function initGame(){
 }
 function submitClick(){
     $('html').submit('#js-form',function(event){
+      console.log('SUBMIT');
+        
         event.preventDefault();
+        checkParams();
+        // let params = [];
+        // let categorieSearch = checkParams();
+        // let DataObject = runSubmit();
         $('#title_text').text('Your Results');
         $('main').empty();
         $('body').css({'height':'100%'});
@@ -27,11 +33,13 @@ function submitClick(){
         let results = renderResults();
         $('main').html(results);
         navarrow=2;
+        
 
     });
 }
 
 function boxClick(){
+  // Grocery List pop up display
     $('html').on('click','#top_box', function(event){
         $('#title_text').text('Grocery List');
         let results = renderGroceryList();
@@ -46,6 +54,7 @@ function boxClick(){
 
         navarrow=3;
     });
+    // recipes pop up display
       $('html').on('click','#bottom_box',function(event){
         $('#title_text').text('Recipe Ideas');
         let results2 = renderRecipeList();
@@ -111,10 +120,40 @@ function getModalContent(){
 }
 
 function recipeClick(){
-  $('html').on('click','#recipe_list li',function(event){
-    console.log('recipe works');
+  // Get the modal
+var modal = document.getElementById("myModal");
+var modal2= document.getElementById('myModal2');
 
-  }); 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName('close2')[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+$('html').on('click','.close', function(event) {
+  $('html').find('.modal').css({'display':'none'});
+});
+$('html').on('click','.close2', function(event) {
+    $('html').find('.modal2').css({'display':'none'});
+  });
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+  else if (event.target == modal2){
+      modal2.style.display= 'none';
+  }
+}
+
 }
 
 
@@ -196,66 +235,67 @@ function foodQuery(){
     
     <form id='js-form'>
     
-        <h4 id='top_category_title'>Meal Time</h4>
-        <div class= 'form-row'>
-        <label for= 'Breakfast' class='container'>Breakfast
-        <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast" >
-        <span class="checkmark"></span>
-        </label>
+    <h4 id='top_category_title'>Meal Time</h4>
+    <div class= 'form-row'>
+
+    <label for= 'Breakfast' class='container'>Breakfast
+    <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'Lunch' class='container'>Lunch
+    <input type= 'checkbox' id='Lunch' name='Lunch' value="Lunch">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'Dinner' class='container'>Dinner
+    <input type= 'checkbox' id='Dinner' name='Dinner' value="Dinner">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'allday' class='container'>All Day
+    <input type= 'checkbox' id='allday' name='allday' value="allday">
+    <span class="checkmark"></span>
+    </label>
+  </div>
+
+    <h4>Categories</h4>
+  <div class= 'form-row'>
+    <label for= 'vegetarian' class='container'>Vegetarian
+    <input type= 'checkbox' id='vegetarian' name='vegetarian' value="vegetarian">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'vegan' class='container'>Vegan
+    <input type= 'checkbox' id='vegan' name='vegan' value="vegan">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'glutenFree' class='container'>Gluten Free
+    <input type= 'checkbox' id='glutenFree' name='glutenFree' value="glutenFree">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'Ketogenic' class='container'>Ketogenic
+    <input type= 'checkbox' id='Ketogenic' name='Ketogenic' value="ketogenic">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'ovo-vegetarian' class='container'>Ovo-Vegetarian
+    <input type= 'checkbox' id='ovo-vegetarian' name='veryHealthy' value="ovo-vegetarian">
+    <span class="checkmark"></span>
+    </label>
+
+    <label for= 'paleo' class='container'>Paleo
+    <input type= 'checkbox' id='paleo' name='paleo' value="paleo">
+    <span class="checkmark"></span>
+    </label>
+  </div>
+
   
-        <label for= 'Lunch' class='container'>Lunch
-        <input type= 'checkbox' id='Lunch' name='Lunch' value="Lunch">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'Dinner' class='container'>Dinner
-        <input type= 'checkbox' id='Dinner' name='Dinner' value="Dinner">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'allday' class='container'>All Day
-        <input type= 'checkbox' id='allday' name='allday' value="allday">
-        <span class="checkmark"></span>
-        </label>
-      </div>
-  
-        <h4>Categories</h4>
-      <div class= 'form-row'>
-        <label for= 'vegetarian' class='container'>Vegetarian
-        <input type= 'checkbox' id='vegetarian' name='vegetarian' value="vegetarian">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'vegan' class='container'>Vegan
-        <input type= 'checkbox' id='vegan' name='vegan' value="vegan">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'glutenFree' class='container'>Gluten Free
-        <input type= 'checkbox' id='glutenFree' name='glutenFree' value="glutenFree">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'dairyFree' class='container'>Dairy Free
-        <input type= 'checkbox' id='dairyFree' name='dairyFree' value="dairyFree">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'veryHealthy' class='container'>Healthy
-        <input type= 'checkbox' id='veryHealthy' name='veryHealthy' value="veryHealthy">
-        <span class="checkmark"></span>
-        </label>
-  
-        <label for= 'cheap' class='container'>Cheap
-        <input type= 'checkbox' id='cheap' name='cheap' value="cheap">
-        <span class="checkmark"></span>
-        </label>
-      </div>
-  
-      
-    
-    <button type="submit" id='cat_button' >Submit</button>
-  </form>
+
+<button type="submit" id='cat_button' >Submit</button>
+</form>
   
   
     `;
@@ -344,18 +384,18 @@ function navarrowClick(){
             <span class="checkmark"></span>
             </label>
       
-            <label for= 'dairyFree' class='container'>Dairy Free
-            <input type= 'checkbox' id='dairyFree' name='dairyFree' value="dairyFree">
+            <label for= 'Ketogenic' class='container'>Ketogenic
+            <input type= 'checkbox' id='Ketogenic' name='Ketogenic' value="ketogenic">
             <span class="checkmark"></span>
             </label>
       
-            <label for= 'veryHealthy' class='container'>Healthy
-            <input type= 'checkbox' id='veryHealthy' name='veryHealthy' value="veryHealthy">
+            <label for= 'ovo-vegetarian' class='container'>Ovo-Vegetarian
+            <input type= 'checkbox' id='ovo-vegetarian' name='veryHealthy' value="ovo-vegetarian">
             <span class="checkmark"></span>
             </label>
       
-            <label for= 'cheap' class='container'>Cheap
-            <input type= 'checkbox' id='cheap' name='cheap' value="cheap">
+            <label for= 'paleo' class='container'>Paleo
+            <input type= 'checkbox' id='paleo' name='paleo' value="paleo">
             <span class="checkmark"></span>
             </label>
           </div>
@@ -404,39 +444,113 @@ function navarrowClick(){
 }
 
 
-// Get the modal
-var modal = document.getElementById("myModal");
-var modal2= document.getElementById('myModal2');
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-var span2 = document.getElementsByClassName('close2')[0];
+function runSubmit(){
 
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
-$('html').on('click','.close', function(event) {
-  $('html').find('.modal').css({'display':'none'});
-});
-$('html').on('click','.close2', function(event) {
-    $('html').find('.modal2').css({'display':'none'});
-  });
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-  else if (event.target == modal2){
-      modal2.style.display= 'none';
-  }
+function checkParams(){
+let categoriesBox ={
+  breakfast: $('html').find('#Breakfast').prop("checked"),
+  lunch : $('html').find('#Lunch').prop("checked"),
+  dinner :$('html').find('#Dinner').prop("checked"),
+  'all day' :$('html').find('#allday').prop("checked"),
+
+  vegetarian : $('html').find('#vegetarian').prop("checked"),
+  vegan : $('html').find('#vegan').prop("checked"),
+  'gluten free' : $('html').find('#glutenFree').prop("checked"),
+  Ketogenic : $('html').find('#Ketogenic').prop("checked"),
+  "ovo-vegetarian" : $('html').find('#ovo-vegetarian').prop("checked"),
+  paleo : $('html').find('#paleo').prop("checked")
 }
+  if (categoriesBox['all day'] === true || (categoriesBox.breakfast === true &&        categoriesBox.lunch === true && categoriesBox.dinner === true)){
+    categoriesBox.allday = false ;
+    categoriesBox.breakfast = true;
+    categoriesBox.lunch = true;
+    categoriesBox.dinner = true;
+    delete categoriesBox['all day'];
+  }
+  console.log(categoriesBox);
+  
+  // let transportArray = Object.keys(categoriesBox).map(key => `${key}: ${categoriesBox[key]}`);
+  formatParams(categoriesBox);
+
+}
+
+function formatParams(array){
+ 
+  for (let i = 0 ; i <10 ; i++){
+
+    console.log('hello');
+
+
+    let holder = Object.keys(array)[i];
+     if ((holder === 'breakfast' && array[holder] === true) || ( holder === 'lunch'  && array[holder] === true) || ( holder === 'dinner' && array[holder] === true)){
+        let part = createURL(array, holder);
+     }
+    }
+  }
+  function createURL(array, holder){
+    let emptyTransport = [holder];
+    let newarray = array;
+    let i =0;
+    if (newarray['breakfast'] === true){
+      i = 4;
+    }
+    else if (newarray['lunch'] === true){
+      i = 4;
+    }
+    
+    else if (newarray['dinner'] === true){
+      i =4;
+    }
+    for ( i ; i <10 ; i++){
+      console.log('in createURL function');
+      let list = Object.keys(array)[i];
+    if (newarray[list] === true){
+      emptyTransport.push(list);
+    }
+  }
+  console.log(emptyTransport);
+  let urlSearchTags = emptyTransport.join('%2C');
+  console.log(urlSearchTags);
+  
+}
+
+function runfetch(){
+
+  let url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
+  const params = {
+  
+  }
+  const options = {
+    headers: new Headers({
+      "X-RapidAPI-Host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      "X-RapidAPI-Key": "2c894d0d43msh85c363aa10f7131p1906eejsn3585c14e851b",
+      "cheap:": "true"
+    })
+  };
+
+
+
+
+fetch(url, options)
+  .then(response => response.json())
+  .then (responseJson => console.log(responseJson));
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -445,7 +559,7 @@ window.onclick = function(event) {
 
 
 function loadScript(){
-    initGame();
+    initGroceryBuddy();
     submitClick();
     boxClick();
     navarrowClick();
