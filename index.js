@@ -51,6 +51,7 @@ function boxClick(){
         $('main').html(results);
         $('body').append('<footer></footer>');
         $('footer').css({'position':'relative'});
+        $('html').find('body').css({'background-size': 'auto'});
 
         navarrow=3;
     });
@@ -72,6 +73,7 @@ function boxClick(){
       $('html').find('#myModal').css({'display':'block'});
       let modal_content = getModalContent();
       $('html').find('.modal-content').html(modal_content);
+      
     });
 
     $('html').on('click','#nutrition_link', function(event){
@@ -308,6 +310,7 @@ function navarrowClick(){
         $('main').empty();
         $('main').detach();
         $('#js-form').detach();
+        $('html').find('body').css({'background-size': 'cover'});
         if (navarrow === 1){
             $('header').append(`
         
@@ -318,12 +321,8 @@ function navarrowClick(){
             <button type="button" id='startGame'>Start</button>
           </div>
           <main>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi enim voluptate, distinctio quo voluptatibus.</p>
-          <div id='selector_buttons'>
-          <i class="fas fa-circle" id="1circle"></i>
-          <i class="fas fa-circle unchecked" id="circle"></i>
-          <i class="fas fa-circle unchecked" id="circle"></i>
-          </div>
+          <p>Grocery Buddy helps you make great tasting food and plans out your grocery list for the week. Try it now!</p>
+          
           </main>
         `);
       
@@ -475,7 +474,8 @@ let categoriesBox ={
   console.log(categoriesBox);
   
   // let transportArray = Object.keys(categoriesBox).map(key => `${key}: ${categoriesBox[key]}`);
-  formatParams(categoriesBox);
+  let endpoint = formatParams(categoriesBox);
+  // runfetch(endpoint);
 
 }
 
@@ -489,6 +489,7 @@ function formatParams(array){
     let holder = Object.keys(array)[i];
      if ((holder === 'breakfast' && array[holder] === true) || ( holder === 'lunch'  && array[holder] === true) || ( holder === 'dinner' && array[holder] === true)){
         let part = createURL(array, holder);
+        return part ;
      }
     }
   }
@@ -510,37 +511,39 @@ function formatParams(array){
       console.log('in createURL function');
       let list = Object.keys(array)[i];
     if (newarray[list] === true){
-      emptyTransport.push(list);
+      let variable = list.replace(' ','');
+      emptyTransport.push(variable);
     }
   }
   console.log(emptyTransport);
   let urlSearchTags = emptyTransport.join('%2C');
-  console.log(urlSearchTags);
+ return urlSearchTags;
+ 
   
 }
 
-function runfetch(){
+// function runfetch(part){
 
-  let url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
-  const params = {
-  
-  }
-  const options = {
-    headers: new Headers({
-      "X-RapidAPI-Host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-      "X-RapidAPI-Key": "2c894d0d43msh85c363aa10f7131p1906eejsn3585c14e851b",
-      "cheap:": "true"
-    })
-  };
+//   let baseurl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
+//   let url = baseurl+ '&tags='+part
 
-
+ 
+//   const options = {
+//     headers: new Headers({
+//       "X-RapidAPI-Host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+//       "X-RapidAPI-Key": "2c894d0d43msh85c363aa10f7131p1906eejsn3585c14e851b",
+      
+//     })
+//   };
 
 
-fetch(url, options)
-  .then(response => response.json())
-  .then (responseJson => console.log(responseJson));
 
-}
+
+// fetch(url, options)
+//   .then(response => response.json())
+//   .then (responseJson => console.log(responseJson));
+
+// }
 
 
 
