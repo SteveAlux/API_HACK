@@ -1,5 +1,5 @@
 let navarrow = 0;
-
+let arrayOfJson = [];
 
 
 
@@ -15,14 +15,18 @@ function initGroceryBuddy(){
         $('main').css({'height':'auto'});
         $('header').append('<i class="fas fa-arrow-left" id=arrowback ></i>');
         navarrow = 1;
+        
     });
 }
 function submitClick(){
     $('html').submit('#js-form',function(event){
       console.log('SUBMIT');
-        
+      if($('html').find('div.checkbox-group:checkbox').length > 0){
+        console.log('one is clicked');
+      }
         event.preventDefault();
         checkParams();
+        gatherInfo(arrayOfJson);
         // let params = [];
         // let categorieSearch = checkParams();
         // let DataObject = runSubmit();
@@ -204,13 +208,9 @@ function renderRecipeList(){
   return `<div id='recipe_list'>
   <h5>Recipes and their directions</h5>
   <ul>
-  <li id="myBtn">Recipe</li>
-  <li id="myBtn">Recipe</li>
-  <li id="myBtn">Recipe</li>
-  <li id="myBtn">Recipe</li>
-  <li id="myBtn">Recipe</li>
-  
-  
+    <li id="myBtn">Recipe</li>
+    <li id="myBtn">Recipe</li>
+    <li id="myBtn">Recipe</li>
   </ul>
 </div>
   
@@ -238,30 +238,32 @@ function foodQuery(){
     <form id='js-form'>
     
     <h4 id='top_category_title'>Meal Time</h4>
+    <div class=checkbox-group required>
     <div class= 'form-row'>
-
+    
     <label for= 'Breakfast' class='container'>Breakfast
-    <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast">
-    <span class="checkmark"></span>
+    <input type= 'checkbox' id='Breakfast' name='option' value="Breakfast">
+    <span class="checkmark" id='valid'></span>
     </label>
 
     <label for= 'Lunch' class='container'>Lunch
-    <input type= 'checkbox' id='Lunch' name='Lunch' value="Lunch">
-    <span class="checkmark"></span>
+    <input type= 'checkbox' id='Lunch' name='option' value="Lunch">
+    <span class="checkmark" id='valid'></span>
     </label>
 
     <label for= 'Dinner' class='container'>Dinner
-    <input type= 'checkbox' id='Dinner' name='Dinner' value="Dinner">
-    <span class="checkmark"></span>
+    <input type= 'checkbox' id='Dinner' name='option' value="Dinner">
+    <span class="checkmark" id='valid'></span>
     </label>
 
     <label for= 'allday' class='container'>All Day
-    <input type= 'checkbox' id='allday' name='allday' value="allday">
-    <span class="checkmark"></span>
+    <input type= 'checkbox' id='allday' name='option' value="allday">
+    <span class="checkmark" id='valid'></span>
     </label>
+    </div>
   </div>
 
-    <h4>Categories</h4>
+    <h4>Categories (Optional)</h4>
   <div class= 'form-row'>
     <label for= 'vegetarian' class='container'>Vegetarian
     <input type= 'checkbox' id='vegetarian' name='vegetarian' value="vegetarian">
@@ -343,30 +345,33 @@ function navarrowClick(){
             $('body').append(`<main><form id='js-form'>
     
             <h4 id='top_category_title'>Meal Time</h4>
+            <div class=checkbox-group required>
             <div class= 'form-row'>
-    
+
             <label for= 'Breakfast' class='container'>Breakfast
             <input type= 'checkbox' id='Breakfast' name='Breakfast' value="Breakfast">
-            <span class="checkmark"></span>
+            <span class="checkmark" id='valid'></span>
             </label>
       
             <label for= 'Lunch' class='container'>Lunch
             <input type= 'checkbox' id='Lunch' name='Lunch' value="Lunch">
-            <span class="checkmark"></span>
+            <span class="checkmark" id='valid'></span>
             </label>
       
             <label for= 'Dinner' class='container'>Dinner
             <input type= 'checkbox' id='Dinner' name='Dinner' value="Dinner">
-            <span class="checkmark"></span>
+            <span class="checkmark" id='valid'></span>
             </label>
       
             <label for= 'allday' class='container'>All Day
             <input type= 'checkbox' id='allday' name='allday' value="allday">
-            <span class="checkmark"></span>
+            <span class="checkmark" id='valid'></span>
             </label>
+            </div>
           </div>
       
-            <h4>Categories</h4>
+            <h4>Categories (Optional)</h4>
+            <div class=checkbox-group required>
           <div class= 'form-row'>
             <label for= 'vegetarian' class='container'>Vegetarian
             <input type= 'checkbox' id='vegetarian' name='vegetarian' value="vegetarian">
@@ -397,6 +402,7 @@ function navarrowClick(){
             <input type= 'checkbox' id='paleo' name='paleo' value="paleo">
             <span class="checkmark"></span>
             </label>
+            </div>
           </div>
       
           
@@ -464,36 +470,66 @@ let categoriesBox ={
   "ovo-vegetarian" : $('html').find('#ovo-vegetarian').prop("checked"),
   paleo : $('html').find('#paleo').prop("checked")
 }
-  if (categoriesBox['all day'] === true || (categoriesBox.breakfast === true &&        categoriesBox.lunch === true && categoriesBox.dinner === true)){
+  if (categoriesBox['all day'] === true || (categoriesBox.breakfast === true && categoriesBox.lunch === true && categoriesBox.dinner === true)){
     categoriesBox.allday = false ;
     categoriesBox.breakfast = true;
     categoriesBox.lunch = true;
     categoriesBox.dinner = true;
-    delete categoriesBox['all day'];
+    
   }
   console.log(categoriesBox);
   
   // let transportArray = Object.keys(categoriesBox).map(key => `${key}: ${categoriesBox[key]}`);
-  let endpoint = formatParams(categoriesBox);
-  // runfetch(endpoint);
+  formatParams(categoriesBox);
+  
 
 }
 
 function formatParams(array){
  
-  for (let i = 0 ; i <10 ; i++){
+  for (let i = 0 ; i <4 ; i++){
 
     console.log('hello');
 
 
     let holder = Object.keys(array)[i];
-     if ((holder === 'breakfast' && array[holder] === true) || ( holder === 'lunch'  && array[holder] === true) || ( holder === 'dinner' && array[holder] === true)){
-        let part = createURL(array, holder);
-        return part ;
+     if (((holder === 'breakfast' && array[holder] === true) || ( holder === 'lunch'  && array[holder] === true) || ( holder === 'dinner' && array[holder] === true))){
+         createURL(array, holder,0);
+       
      }
+     else if (((array['breakfast'] === false) && ( array['lunch'] === false) && (array['dinner'] === false) && (array['all day']=== false ))&& i<3){
+      
+       createURL(array,holder,24);
+     }
+     
+     
+     
     }
   }
-  function createURL(array, holder){
+  function createURL(array, holder,number){
+   
+    if (number === 24) {
+
+      let emptyTransport = [holder];
+      let newarray = array;
+    let i =0;
+
+    for ( i ; i <10 ; i++){
+      console.log('in createURL function');
+      let list = Object.keys(array)[i];
+      if (newarray[list] === true){
+        let variable = list.replace(' ','');
+        emptyTransport.push(variable);
+      }
+
+  }
+  console.log(emptyTransport);
+  
+  let urlSearchTags = emptyTransport.join('%2C');
+  console.log(urlSearchTags);
+  runfetch(urlSearchTags);
+    }
+    else {
     let emptyTransport = [holder];
     let newarray = array;
     let i =0;
@@ -507,6 +543,7 @@ function formatParams(array){
     else if (newarray['dinner'] === true){
       i =4;
     }
+    
     for ( i ; i <10 ; i++){
       console.log('in createURL function');
       let list = Object.keys(array)[i];
@@ -514,36 +551,52 @@ function formatParams(array){
       let variable = list.replace(' ','');
       emptyTransport.push(variable);
     }
+
   }
   console.log(emptyTransport);
-  let urlSearchTags = emptyTransport.join('%2C');
- return urlSearchTags;
- 
   
+  let urlSearchTags = emptyTransport.join('%2C');
+  console.log(urlSearchTags);
+  runfetch(urlSearchTags);
+ 
+} 
 }
 
-// function runfetch(part){
+function runfetch(part){
 
-//   let baseurl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
-//   let url = baseurl+ '&tags='+part
-
+  let baseurl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
+  let url = baseurl+ '&tags='+part
+console.log(url);
  
-//   const options = {
-//     headers: new Headers({
-//       "X-RapidAPI-Host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-//       "X-RapidAPI-Key": "2c894d0d43msh85c363aa10f7131p1906eejsn3585c14e851b",
+  const options = {
+    headers: new Headers({
+      "X-RapidAPI-Host":"spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      "X-RapidAPI-Key": "2c894d0d43msh85c363aa10f7131p1906eejsn3585c14e851b",
       
-//     })
-//   };
+    })
+  };
 
 
 
 
-// fetch(url, options)
-//   .then(response => response.json())
-//   .then (responseJson => console.log(responseJson));
+fetch(url, options)
+  .then(response => response.json())
+  .then(responseJson => arrayOfJson.push(responseJson));
+  console.log(arrayOfJson);
 
-// }
+}
+
+
+// MANIPULATING USER RESPONSE CODE BELOW 
+
+function gatherInfo(arrayOfJson){
+  for (let i = o; i <3;i++){
+    arrayOfJson[i]
+  }
+
+}
+
+
 
 
 
@@ -567,6 +620,7 @@ function loadScript(){
     boxClick();
     navarrowClick();
     recipeClick();
+    
 }
 
 $(loadScript);
