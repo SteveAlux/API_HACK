@@ -4,6 +4,22 @@
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
+label{
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+label:hover{
+  color: white;
+  
+}
+label:focus{
+  background-color: white;
+}
+label::after{
+  background-color: white;
+}
 html{
   height: 100%;
 }
@@ -35,7 +51,7 @@ header{
   color:rgba(235, 235, 235, 0.993);
   background-color: #1FA517;
   font-size: 18px;
-  width: 50%;
+  width: 80%;
   display: flex;
   justify-content: center;
   margin-left: auto;
@@ -199,6 +215,7 @@ footer{
 }
 #grocery_list h5{
   padding:5px;
+  
 }
 
 #bottom_box{
@@ -282,6 +299,7 @@ section{
 #js-form h4{
   background-color: rgba(255, 255, 255, 0.445);
   color:white;
+  text-align: center;
   
 }
 #top_category_title{
@@ -324,12 +342,14 @@ h4{
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  margin-left:auto;
+  margin-right: auto;
+  /* background-color: #eee; */
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-  background-color: #ccc;
+  /* background-color: #ccc; */
 }
 
 /* When the checkbox is checked, add a blue background */
