@@ -1,5 +1,5 @@
 let navarrow = 0;
-let arrayOfJson = [];
+
 
 
 
@@ -18,6 +18,7 @@ function initGroceryBuddy(){
         
     });
 }
+
 function submitClick(){
     $('html').submit('#js-form',function(event){
       console.log('SUBMIT');
@@ -26,16 +27,22 @@ function submitClick(){
       }
         event.preventDefault();
         checkParams();
-        gatherInfo(arrayOfJson);
+        
         // let params = [];
         // let categorieSearch = checkParams();
         // let DataObject = runSubmit();
+        
         $('#title_text').text('Your Results');
         $('main').empty();
         $('body').css({'height':'100%'});
         $('main').css({ 'display':'flex','flex-direction':'column','height':'100%','justify-content': 'space-evenly'});
+        
         let results = renderResults();
+        
+       
+        
         $('main').html(results);
+        
         navarrow=2;
         
 
@@ -56,26 +63,33 @@ function boxClick(){
         $('body').append('<footer></footer>');
         $('footer').css({'position':'relative'});
         $('html').find('body').css({'background-size': 'auto'});
-
+        addFoodList();
         navarrow=3;
     });
     // recipes pop up display
       $('html').on('click','#bottom_box',function(event){
         $('#title_text').text('Recipe Ideas');
         let results2 = renderRecipeList();
+       
         $('footer').detach();
         $('body').css({'height':'auto'});
         $('main').empty();
         $('main').html(results2);
         $('body').append('<footer></footer>');
         $('footer').css({'position': 'absolute','bottom':'0'});
-       
+       addRecipeList();
         navarrow=3;
     });
     //MODAL OPENING CODE--------------------------------------------
     $('html').on('click','#recipe_list #myBtn',function(event){
       $('html').find('#myModal').css({'display':'block'});
-      let modal_content = getModalContent();
+      let recipeName = $(this).attr('data-name');
+      let recipeimg = $(this).attr('data-img');
+      let recipeinst = $(this).attr('data-instructions');
+      let recipecost = $(this).attr('data-cost');
+      let recipeingri= $(this).attr('data-ing');
+      
+      let modal_content = getModalContent(recipeName,recipeimg,recipeinst,recipecost,recipeingri);
       $('html').find('.modal-content').html(modal_content);
       
     });
@@ -106,21 +120,19 @@ function getModalContent2(){
     `;
 }
 
-function getModalContent(){
+function getModalContent(recipeName,recipeImg,recipeins,recipecost,recipeing){
+  console.log(recipeing);
+  
   return `
   <span class="close">&times;</span>
-  <h2>Name of Recipe</h6>
-  <img src='' alt='photo of recipe'>
-  <p>Directions on how you will be preparing this food lorem psum dolor sit amet consectetur adipisicing elit. Eligendi enim voluptate, distinctio quo voluptatibus </p>
+  <h2 id='name_recipe'>${recipeName}</h6>
+  <img  id = 'img_recipe'src='${recipeImg}' alt='photo of recipe'>
+  <p id='recipe_directions'> ${recipeins}</p>
   <h3>Ingridients</h6>
-  <ul>
-    <li>ingridient</li>
-    <li>ingridient</li>
-    <li>ingridient</li>
-    <li>ingridient</li>
-    <li>ingridient</li>
+  <ul id='recipe_ingredients_landing'>
+    ${recipeing}
   </ul>
-  <p>Cost of Meal: _______</p>
+  <p id='recipe_cost'>${recipecost}</p>
   <p id='nutrition_link' class='link'>Nutrition Facts </p>
   `
 }
@@ -164,39 +176,12 @@ window.onclick = function(event) {
 
 
 function renderGroceryList(){
+
     return `
     <div id='grocery_list'>
       <h5>List for this week</h5>
-      <ul>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
-        <li>Food</li>
+      <ul id='food_list_landing'>
+        
       
       </ul>
     </div>
@@ -207,10 +192,9 @@ function renderGroceryList(){
 function renderRecipeList(){
   return `<div id='recipe_list'>
   <h5>Recipes and their directions</h5>
-  <ul>
-    <li id="myBtn">Recipe</li>
-    <li id="myBtn">Recipe</li>
-    <li id="myBtn">Recipe</li>
+  <ul id= 'recipe_name_landing'>
+    
+    
   </ul>
 </div>
   
@@ -497,6 +481,25 @@ function formatParams(array){
          createURL(array, holder,0);
        
      }
+     if ((holder === 'breakfast ' && array[holder] === true &&  array['lunch'] === false && array['dinner'] === false)){
+       createURL(array,'breakfast',0);
+       createURL(array,'breakfast',0);
+       createURL(array,'breakfast',0);
+
+     }
+
+     else if ((holder === 'lunch ' && array[holder] === true &&  array['breakfast'] === false && array['dinner'] === false)){
+       createURL(array,'lunch',0);
+       createURL(array,'lunch',0);
+       createURL(array,'lunch',0);
+     }
+
+     else if ((holder === 'dinner ' && array[holder] === true &&  array['lunch'] === false && array['breakfast'] === false)){
+      createURL(array,'dinner',0);
+      createURL(array,'dinner',0);
+      createURL(array,'dinner',0);
+     }
+
      else if (((array['breakfast'] === false) && ( array['lunch'] === false) && (array['dinner'] === false) && (array['all day']=== false ))&& i<3){
       
        createURL(array,holder,24);
@@ -581,20 +584,81 @@ console.log(url);
 
 fetch(url, options)
   .then(response => response.json())
-  .then(responseJson => arrayOfJson.push(responseJson));
-  console.log(arrayOfJson);
+  .then(responseJson => gatherInfo(responseJson));
+
+  
 
 }
 
 
-// MANIPULATING USER RESPONSE CODE BELOW 
+// // MANIPULATING USER RESPONSE CODE BELOW 
+let masterFoodList = {};
+let recipeHolding = {};
+let w= 0;
 
 function gatherInfo(arrayOfJson){
-  for (let i = o; i <3;i++){
-    arrayOfJson[i]
-  }
+  index = 0;
+  console.log('inside gatherInfo');
+  console.log(arrayOfJson) ;
+
+  
+
+    console.log(arrayOfJson['recipes']);
+    let ingredientsList = arrayOfJson['recipes'][0].extendedIngredients.length;
+    
+    while (index < ingredientsList){
+    let ingredientsListid = arrayOfJson['recipes'][0].extendedIngredients[index].id;
+    let ingredientsListText = arrayOfJson['recipes'][0].extendedIngredients[index].name;
+    
+    masterFoodList[ingredientsListid]=ingredientsListText;
+
+    index++;
+    
+    console.log(ingredientsListText);
+    console.log(ingredientsListid)
+    }
+     let recipeTemplate=[];
+    let recipeName = arrayOfJson['recipes'][0].title;
+    let recipeImg = arrayOfJson['recipes'][0].image;
+    let instructions = arrayOfJson['recipes'][0].instructions;
+    let recipeCost = arrayOfJson['recipes'][0].pricePerServing;
+    let recipeIngredients= arrayOfJson['recipes'][0].extendedIngredients;
+      recipeTemplate.push(recipeName);
+      recipeTemplate.push(recipeImg);
+      recipeTemplate.push(instructions);
+      recipeTemplate.push(recipeIngredients);
+      recipeTemplate.push(recipeCost);
+      
+      recipeHolding[w]=recipeTemplate;
+      w++;
+      console.log(recipeTemplate);
+      console.log(recipeHolding);
+    console.log(recipeHolding['0'][0]);
 
 }
+   function addFoodList(){
+     let keyHolder = Object.keys(masterFoodList);
+     console.log('working?????');
+     for(let i = 0 ; i<Object.keys(masterFoodList).length; i++){
+       let id = keyHolder[i];
+       console.log('working?????');
+       console.log( masterFoodList[keyHolder[i]]);
+    $('html').find('#food_list_landing').append(`<li>${masterFoodList[id]}</li>`);
+     }
+    }
+    function addRecipeList(){
+      let recipeIngrid = recipeHolding['0'][3].map(ing => `<li>${ing.name}</li>`);
+        $('html').find('#recipe_name_landing').append(`<li id="myBtn" data-name= '${recipeHolding['0'][0]}' data-img = '${recipeHolding['0'][1]}' data-instructions = '${recipeHolding['0'][2]}' data-cost = '${recipeHolding['0'][4]}' data-ing = '${recipeIngrid}'>${recipeHolding['0'][0]}</li>`);
+    }
+    // function addRecipe(){
+    //   for (let i = 0; i<recipeTemplate.length; i++){
+    //     $('html').find('name_recipe').text(`${recipeTemplate[]}`);
+    //     $('html').find('');
+    //     $('html').find('');
+    //     $('html').find('');
+    //     $('html').find('');
+    //   }
+    // }
 
 
 
@@ -620,7 +684,11 @@ function loadScript(){
     boxClick();
     navarrowClick();
     recipeClick();
+    addFoodList();
     
 }
 
 $(loadScript);
+
+
+
