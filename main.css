@@ -420,6 +420,10 @@ h4{
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+.modal-content2 ul{
+  list-style:none;
+  padding-top: 10px;
+}
 
 
 /* The Close Button */
