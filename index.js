@@ -1,11 +1,23 @@
 let navarrow = 0;
 
 
-
+function pause(numberMillis) { 
+  var now = new Date();
+  $('body').fadeOut(600); 
+  
+  var exitTime = now.getTime() + numberMillis; 
+  while (true) { 
+      now = new Date(); 
+      if (now.getTime() > exitTime) 
+          return; 
+  } 
+} 
 
 function initGroceryBuddy(){
     $('html').on('click','#startGame', function(event){
-        console.log('woah');
+      
+        pause(600);
+        
         let foodform = foodQuery();
         $('main').empty();
         
@@ -15,48 +27,34 @@ function initGroceryBuddy(){
         $('main').css({'height':'auto'});
         $('header').append('<i class="fas fa-arrow-left" id=arrowback ></i>');
         navarrow = 1;
+        $('body').fadeIn(2000);
         
     });
 }
 
 function submitClick(){
     $('html').submit('#js-form',function(event){
-      console.log('SUBMIT');
-      if($('html').find('div.checkbox-group:checkbox').length > 0){
-        console.log('one is clicked');
-      }
+     
         event.preventDefault();
         checkParams();
-        
-        // let params = [];
-        // let categorieSearch = checkParams();
-        // let DataObject = runSubmit();
-        
+        pause(600);
         $('#title_text').text('Your Results');
         $('main').empty();
         $('body').css({'height':'100%'});
         $('main').css({ 'display':'flex','flex-direction':'column','height':'100%','justify-content': 'space-evenly'});
-        
         let results = renderResults();
-        
-       
-        
-        $('main').html(results);
-        
+        $('main').html(results);        
         navarrow=2;
-        
-
+        $('body').fadeIn(2000);
     });
 }
 
 function boxClick(){
   // Grocery List pop up display
     $('html').on('click','#top_box', function(event){
-        $('#title_text').text('Grocery List');
-        let results = renderGroceryList();
-        $('footer').detach();
-
-       
+       $('#title_text').text('Grocery List');
+       let results = renderGroceryList();
+       $('footer').detach();       
        $('body').css({'height':'auto'});
         $('main').empty();
         $('main').html(results);
@@ -70,7 +68,6 @@ function boxClick(){
       $('html').on('click','#bottom_box',function(event){
         $('#title_text').text('Recipe Ideas');
         let results2 = renderRecipeList();
-       
         $('footer').detach();
         $('body').css({'height':'auto'});
         $('main').empty();
@@ -82,25 +79,21 @@ function boxClick(){
     });
     //MODAL OPENING CODE--------------------------------------------
     $('html').on('click','#recipe_list #myBtn',function(event){
+      
       $('html').find('#myModal').css({'display':'block'});
       let recipeName = $(this).attr('data-name');
       let recipeimg = $(this).attr('data-img');
       let recipeinst = $(this).attr('data-instructions');
       let recipecost = $(this).attr('data-cost');
       let recipeingri= $(this).attr('data-ing');
-      let dataindex = $(this).attr('data-index');
-      let calories = $(this).attr('data-cal');
-        let carbs=$(this).attr('data-carbs');
-        let fat = $(this).attr('data-fat');
-        let protien = $(this).attr('data-protien');
+      let dataindex = $(this).attr('data-index');      
       let good = $(this).attr('data-good');
-        let bad = $(this).attr('data-bad');
-        console.log(good);
+      let bad = $(this).attr('data-bad');
       let modal_content = getModalContent(recipeName,recipeimg,recipeinst,recipecost,recipeingri,dataindex,good,bad);
       $('html').find('.modal-content').html(modal_content);
-      
+      $('html').find('#myModal').slideDown();
     });
-
+    // Pop Up display for the nutrition facts
     $('html').on('click','#nutrition_link', function(event){
         $('html').find('#myModal2').css({'display':'block'});
         $('html').find('.modal').css({'display':'none'});
@@ -112,35 +105,27 @@ function boxClick(){
         let bad = $(this).attr('data-bad');
         let dataindex = $(this).attr('data-index');
         let recipeIngrid = $(this).attr('data-ing');
-        console.log(good);
       let modal_content2 = getModalContent2(calories,carbs,fat,protien,good,bad,dataindex,recipeIngrid);
-
       $('html').find('.modal-content2').html(modal_content2);
     });
     $('html').on('click','#recipe_info', function(event){
-        $('html').find('#myModal').css({'display':'block'});
-        $('html').find('.modal2').css({'display':'none'});
-        let recipeName = $(this).attr('data-name');
+      $('html').find('#myModal').css({'display':'block'});
+      $('html').find('.modal2').css({'display':'none'});
+      let recipeName = $(this).attr('data-name');
       let recipeimg = $(this).attr('data-img');
       let recipeinst = $(this).attr('data-instructions');
       let recipecost = $(this).attr('data-cost');
       let recipeingri= $(this).attr('data-ing');
       let dataindex = $(this).attr('data-index');
-      let calories = $(this).attr('data-cal');
-        let carbs=$(this).attr('data-carbs');
-        let fat = $(this).attr('data-fat');
-        let protien = $(this).attr('data-protien');
       let good = $(this).attr('data-good');
-        let bad = $(this).attr('data-bad');
-        console.log(good);
+      let bad = $(this).attr('data-bad');
       let modal_content = getModalContent(recipeName,recipeimg,recipeinst,recipecost,recipeingri,dataindex,good,bad);
       $('html').find('.modal-content').html(modal_content);
     });
 }
-
-
+//Function to display nutrition facts modal
 function getModalContent2(calories,carbs,fat,protien,good,bad,dataindex,recipeIngrid){
-  console.log(good);
+  
     return `<span class="close2">&times;</span>
     <h2>Nutrition Facts</h6>
     <ul>
@@ -153,14 +138,12 @@ function getModalContent2(calories,carbs,fat,protien,good,bad,dataindex,recipeIn
       <h4>Bad Stuff:</h4>
       <ul class= 'list_nut'>${bad}</ul>
     </ul>
-    
     <p id='recipe_info' class='link' data-index= '${dataindex}' data-name= '${recipeHolding[`${dataindex}`][0]}' data-img = '${recipeHolding[`${dataindex}`][1]}' data-instructions = '${recipeHolding[`${dataindex}`][2]}' data-cost = '${recipeHolding[`${dataindex}`][4]}' data-ing = '${recipeIngrid}' data-good = '${good}' data-bad = '${bad}'>Back to recipe</p>
-    
     `;
 }
-
+//Function to diplay recipe information modal
 function getModalContent(recipeName,recipeImg,recipeins,recipecost,recipeing,dataindex,good,bad,recipeIngrid){
-  console.log(good);
+  
   let recipenewcost=recipecost /100;
   return `
   <span class="close">&times;</span>
@@ -220,29 +203,20 @@ function renderGroceryList(){
     <div id='grocery_list'>
       <h5>List for this week</h5>
       <ul id='food_list_landing'>
-        
-      
       </ul>
     </div>
-    
-    
     `;
 }
 function renderRecipeList(){
   return `<div id='recipe_list'>
   <h5>Recipes and their directions</h5>
-  <ul id= 'recipe_name_landing'>
-    
-    
+  <ul id= 'recipe_name_landing'>  
   </ul>
 </div>
-  
-  
   `
-
 }
 
-
+// Grocery list and Recipes list box display
 function renderResults(){
     return  ` 
     <div class='results_box' id='top_box' >
@@ -254,12 +228,11 @@ function renderResults(){
         <i class="fas fa-utensils" id='pics'></i>
     </div>`;
 }
-
+// Function that will display the food form for picking the checkboxes
 function foodQuery(){
     return `
-    
     <form id='js-form'>
-    
+
     <h4 id='top_category_title'>Meal Time</h4>
     <div class=checkbox-group required>
     <div class= 'form-row'>
@@ -318,17 +291,11 @@ function foodQuery(){
     <span class="checkmark"></span>
     </label>
   </div>
-
-  
-
 <button type="submit" id='cat_button' >Submit</button>
 </form>
-  
-  
     `;
 }
-
-
+//Function to determine which type of template to display due to the fact of which 'navarrow' it works with
 function navarrowClick(){
     $('html').on('click','#arrowback',function(event){
         $('header').empty();
@@ -337,22 +304,16 @@ function navarrowClick(){
         $('#js-form').detach();
         $('html').find('body').css({'background-size': 'cover'});
         if (navarrow === 1){
-            $('header').append(`
-        
+            $('header').append(`       
             <h2 id='title_text'>Grocery Buddy</h2>
-         `);
-         
-            $('body').append(`<div id='shopping_cart_image'>
+         `);        
+           $('body').append(`<div id='shopping_cart_image'>
             <button type="button" id='startGame'>Start</button>
-          </div>
-          <main>
-          <p>Grocery Buddy helps you make great tasting food and plans out your grocery list for the week. Try it now!</p>
-          
-          </main>
-        `);
-      
-            
-           
+            </div>
+           <main>
+            <p>Grocery Buddy helps you make great tasting food and plans out your grocery list for the week. Try it now!</p>          
+            </main>
+          `);                 
             navarrow=0;
             
         }
@@ -506,9 +467,9 @@ let categoriesBox ={
     categoriesBox.dinner = true;
     
   }
-  console.log(categoriesBox);
   
-  // let transportArray = Object.keys(categoriesBox).map(key => `${key}: ${categoriesBox[key]}`);
+  
+  
   formatParams(categoriesBox);
   
 
@@ -518,7 +479,7 @@ function formatParams(array){
  
   for (let i = 0 ; i <4 ; i++){
 
-    console.log('hello');
+   
 
 
     let holder = Object.keys(array)[i];
@@ -564,7 +525,7 @@ function formatParams(array){
     let i =0;
 
     for ( i ; i <10 ; i++){
-      console.log('in createURL function');
+
       let list = Object.keys(array)[i];
       if (newarray[list] === true){
         let variable = list.replace(' ','');
@@ -572,10 +533,10 @@ function formatParams(array){
       }
 
   }
-  console.log(emptyTransport);
+  
   
   let urlSearchTags = emptyTransport.join('%2C');
-  console.log(urlSearchTags);
+  
   runfetch(urlSearchTags);
     }
     else if (number === 26){
@@ -594,7 +555,7 @@ function formatParams(array){
     }
     
     for ( i ; i <10 ; i++){
-      console.log('in createURL function');
+  
       let list = Object.keys(array)[i];
     if (newarray[list] === true){
       let variable = list.replace(' ','');
@@ -602,10 +563,10 @@ function formatParams(array){
     }
 
   }
-  console.log(emptyTransport);
+
   
   let urlSearchTags = emptyTransport.join('%2C');
-  console.log(urlSearchTags);
+  
   runfetch(urlSearchTags);
  
     }
@@ -625,7 +586,7 @@ function formatParams(array){
     }
     
     for ( i ; i <10 ; i++){
-      console.log('in createURL function');
+     
       let list = Object.keys(array)[i];
     if (newarray[list] === true){
       let variable = list.replace(' ','');
@@ -633,10 +594,10 @@ function formatParams(array){
     }
 
   }
-  console.log(emptyTransport);
+
   
   let urlSearchTags = emptyTransport.join('%2C');
-  console.log(urlSearchTags);
+  
   runfetch(urlSearchTags);
  
 } 
@@ -646,7 +607,7 @@ function runfetch(part){
 
   let baseurl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1";
   let url = baseurl+ '&tags='+part
-console.log(url);
+
  
   const options = {
     headers: new Headers({
@@ -694,8 +655,7 @@ fetch(url2, options)
 }
 
 function gatherNutrition2(NutritionJson){
-  console.log('THIS IS NUTRITION');
-  console.log(NutritionJson);
+ 
    let nutritionTemplate=[];
   let calories = NutritionJson['calories'];
   let carbs = NutritionJson['carbs'];
@@ -712,7 +672,7 @@ function gatherNutrition2(NutritionJson){
 
   recipeNutrition[n]=nutritionTemplate;
   n++;
-  console.log(recipeNutrition['0']);
+ 
 
 }
 
@@ -721,12 +681,11 @@ function gatherNutrition2(NutritionJson){
 function gatherInfo(arrayOfJson){
   
   index = 0;
-  console.log('inside gatherInfo');
-  console.log(arrayOfJson) ;
+ 
   gatherNutrition(arrayOfJson);
   
 
-    console.log(arrayOfJson['recipes']);
+   
     let ingredientsList = arrayOfJson['recipes'][0].extendedIngredients.length;
     
     while (index < ingredientsList){
@@ -737,8 +696,6 @@ function gatherInfo(arrayOfJson){
 
     index++;
     
-    console.log(ingredientsListText);
-    console.log(ingredientsListid)
     }
      let recipeTemplate=[];
     let recipeName = arrayOfJson['recipes'][0].title;
@@ -754,18 +711,15 @@ function gatherInfo(arrayOfJson){
       
       recipeHolding[w]=recipeTemplate;
       w++;
-      console.log(recipeTemplate);
-      console.log(recipeHolding);
-    console.log(recipeHolding['0'][0]);
+     
 
 }
    function addFoodList(){
      let keyHolder = Object.keys(masterFoodList);
-     console.log('working?????');
+     
      for(let i = 0 ; i<Object.keys(masterFoodList).length; i++){
        let id = keyHolder[i];
-       console.log('working?????');
-       console.log( masterFoodList[keyHolder[i]]);
+       
     $('html').find('#food_list_landing').append(`<li>${masterFoodList[id]}</li>`);
      }
     }
@@ -782,21 +736,11 @@ function gatherInfo(arrayOfJson){
       
         $('html').find('#recipe_name_landing').append(`<li id="myBtn" data-index= '${dataindex}'data-name= '${recipeHolding[`${dataindex}`][0]}' data-img = '${recipeHolding[`${dataindex}`][1]}' data-instructions = '${recipeHolding[`${dataindex}`][2]}' data-cost = '${recipeHolding[`${dataindex}`][4]}' data-ing = '${recipeIngrid}'
         data-cal = '${recipeNutrition[`${dataindex}`][0]}' data-carbs= '${recipeNutrition[`${dataindex}`][1]}' data-fat= '${recipeNutrition[`${dataindex}`][2]}' data-protien = '${recipeNutrition[`${dataindex}`][3]}' data-good = '${goodlist}' data-bad = '${badlist}'>${recipeHolding[`${dataindex}`][0]}</li>`);
-      console.log(dataindex);
-
         recipeindex++;
-      console.log(dataindex);
+      
       }
     }
-    // function addRecipe(){
-    //   for (let i = 0; i<recipeTemplate.length; i++){
-    //     $('html').find('name_recipe').text(`${recipeTemplate[]}`);
-    //     $('html').find('');
-    //     $('html').find('');
-    //     $('html').find('');
-    //     $('html').find('');
-    //   }
-    // }
+ 
 
 
 
