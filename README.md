@@ -9,7 +9,6 @@ HTML,CSS,JS and jQuery
 
 
 	![GitHub Logo](HomePageSC.png)
-Format: ![Alt Text](HomrPageSC.png)
 
 	Form page: FormSC.png
 	
