@@ -5,15 +5,22 @@ This is an application that helps the user create a grocery list and a recipe la
 Tech Used:
 
 HTML,CSS,JS and jQuery
-
+Home Page:
 ![Home Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
-	Form page: FormSC.png
+
+Form Page:
+![Form Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/FormSC.png)
 	
-	Results page : ResultsSC.png
+Results Page: 
+![Results Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/ResultsSC.png)
 
-	Grocery List page: GroceryListSC.png
+Grocery List Page:
+![Grocery List Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 
-	Recipes page : RecipeListSC.png
+Recipe List Page:
+![Recipe List Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/RecipeListSC.png)
 
-	Recipe Details page : RecipesDetailsSC.png
+![Recipe Details Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/RecipeDetailsSC.png)
+
+	
 
