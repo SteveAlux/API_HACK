@@ -8,7 +8,7 @@ HTML,CSS,JS and jQuery
 
 
 
-	![GitHub Logo](HomePageSC.png)
+	![GitHub Logo](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 
 	Form page: FormSC.png
 	
