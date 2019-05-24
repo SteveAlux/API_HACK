@@ -8,7 +8,7 @@ HTML,CSS,JS and jQuery
 
 ScreenShots:
 
-	Home page:  url(HomePageSC.png)
+	Home page:  <image src="HomePageSC.png">
 
 	Form page: FormSC.png
 	
