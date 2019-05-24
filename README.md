@@ -6,9 +6,10 @@ Tech Used:
 
 HTML,CSS,JS and jQuery
 
-ScreenShots:
 
-	Home page:  <image src="HomePageSC.png">
+
+	![GitHub Logo](HomePageSC.png)
+Format: ![Alt Text](url)
 
 	Form page: FormSC.png
 	
