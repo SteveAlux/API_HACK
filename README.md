@@ -9,7 +9,7 @@ HTML,CSS,JS and jQuery
 
 
 	![GitHub Logo](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
-
+	Format: ![AltText](url)
 	Form page: FormSC.png
 	
 	Results page : ResultsSC.png
