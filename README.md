@@ -5,6 +5,8 @@ This is an application that helps the user create a grocery list and a recipe la
 Tech Used:
 
 HTML,CSS,JS and jQuery
+
+
 Home Page:
 ![Home Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 
