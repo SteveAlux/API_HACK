@@ -6,10 +6,7 @@ Tech Used:
 
 HTML,CSS,JS and jQuery
 
-
-
-	![GitHub Logo](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
-	Format: ![AltText](url)
+![Home Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 	Form page: FormSC.png
 	
 	Results page : ResultsSC.png
