@@ -9,7 +9,7 @@ HTML,CSS,JS and jQuery
 
 Link to live Application:
 
-
+https://stevealux.github.io/Grocery_Buddy/
 
 
 Home Page:
