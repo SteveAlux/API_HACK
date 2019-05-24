@@ -7,6 +7,11 @@ Tech Used:
 HTML,CSS,JS and jQuery
 
 
+Link to live Application:
+
+
+
+
 Home Page:
 ![Home Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 
