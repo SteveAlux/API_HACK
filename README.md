@@ -20,7 +20,7 @@ Grocery List Page:
 ![Grocery List Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/GroceryListSC.png)
 
 Recipe List Page:
-![Recipe List Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/RecipeListSC.png)
+![Recipe List Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/RecipeListSC%20.png)
 
 ![Recipe Details Page](https://github.com/SteveAlux/Grocery_Buddy/blob/master/RecipeDetailsSC.png)
 
